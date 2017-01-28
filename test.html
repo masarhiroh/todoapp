@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Todo List</title>
+  <!-- BootstrapのCSS読み込み -->
+  <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- jQuery読み込み -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- BootstrapのJS読み込み -->
+  <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+  
+  
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="container">
+    <h1>Todos</h1>
+    <form action="" id="new_todo_form">
+      <input type="text" id="new_todo" placeholder="What needs to be done?">
+    </form>
+    <button class="btn btn-primary" data-checkAllClassName="checkGroupA" value="0">全選択</button>
+    <ul id="todos">
+      <li>
+        <input type="checkbox" class="update_todo checkGroupA">
+        <span class="todo_title">見積図番登録方法</span>
+        <button class="delete_todo btn btn-danger">削除</button>
+      </li>
+      <li>
+        <input type="checkbox" class="update_todo checkGroupA">
+        <span class="todo_title">Thunderbird→365移行方法</span>
+        <button class="delete_todo btn btn-danger">削除</button>
+      </li>
+  </div>
+  
+  <input type="hidden" id="token" value="<?= h($_SESSION['token']); ?>">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script>
+  $('[data-checkAllClassName]').on('click', function() {
+      var checkClass = $(this).attr("data-checkAllClassName");
+      var checkVal = $('[data-checkAllClassName]').val();
+      checkVal = (checkVal * 1 + 1) % 2 ;
+      $(this).val(checkVal);
+      if(checkVal == 1){
+        $('.' + checkClass).prop('checked', true);
+        $(this).text("全解除").removeClass('btn-primary').addClass('btn-warning');
+      }else{
+        $('.' + checkClass).prop('checked', false);
+        $(this).text("全選択").removeClass('btn-warning').addClass('btn-primary');
+      }
+      console.log(checkClass);
+  });
+  </script>
+</body>
+</html>
