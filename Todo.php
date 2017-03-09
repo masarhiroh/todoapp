@@ -89,9 +89,9 @@ class Todo {
       throw new \Exception('[create] title not set!');
     }
 
-    $sql = "insert into todos (title) values (:title)";
+    $sql = "insert into todos (title , deadline) values (:title , :deadline)";
     $stmt = $this->_db->prepare($sql);
-    $stmt->execute([':title' => $_POST['title']]);
+    $stmt->execute([':title' => $_POST['title'] , ':deadline' => $_POST['deadline'] ]);
 
     return [
       'id' => $this->_db->lastInsertId()

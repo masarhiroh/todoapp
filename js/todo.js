@@ -6,7 +6,7 @@ $(function() {
   // update
   $('#todos').on('click', '.update_todo', function() {
     // idを取得
-    var id = $(this).parents('li').data('id');
+    var id = $(this).parents('tr').data('id');
     // ajax処理
     $.post('_ajax.php', {
       id: id,
@@ -24,7 +24,7 @@ $(function() {
   // delete
   $('#todos').on('click', '.delete_todo', function() {
     // idを取得
-    var id = $(this).parents('li').data('id');
+    var id = $(this).parents('tr').data('id');
     // ajax処理
     if (confirm('削除してよろしいですか？')) {
       $.post('_ajax.php', {
@@ -41,20 +41,27 @@ $(function() {
   $('#new_todo_form').on('submit', function() {
     // titleを取得
     var title = $('#new_todo').val();
+    var deadline = $('#new_todo_deadline').val();
     // ajax処理
     $.post('_ajax.php', {
       title: title,
+      deadline: deadline,
       mode: 'create',
       token: $('#token').val()
     }, function(res) {
-      // liを追加
-      var $li = $('#todo_template').clone();
-      $li
+      // trを追加
+      var $tr = $('#todo_template').clone();
+      $tr
         .attr('id', 'todo_' + res.id)
         .data('id', res.id)
         .find('.todo_title').text(title);
-      $('#todos').prepend($li.fadeIn());
+      $tr
+        .attr('id', 'todo_' + res.id)
+        .data('id', res.id)
+        .find('.todo_deadline').text(deadline);
+      $('#todos_head').after($tr.fadeIn());
       $('#new_todo').val('').focus();
+      $('#new_todo_deadline').val('');
     });
     return false;
   });
@@ -62,9 +69,9 @@ $(function() {
 
   // チェックボックス全選択
   if($("input[type=checkbox]:checked").size() == 0){
-    $('[data-checkAllClassName]').val('0').text("全選択").removeClass('btn-warning').addClass('btn-primary');
+    $('[data-checkAllClassName]').val('0').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
   } else{
-    $('[data-checkAllClassName]').val('1').text("全解除").removeClass('btn-primary').addClass('btn-warning');
+    $('[data-checkAllClassName]').val('1').removeClass('glyphicon-unchecked').addClass('glyphicon-check');
   }
   
   $('[data-checkAllClassName]').on('click', function() {
@@ -81,11 +88,11 @@ $(function() {
       if(checkVal == 1){
         $('.' + checkClass).prop('checked', true);
         $('.todo_title').addClass('done');
-        $(this).text("全解除").removeClass('btn-primary').addClass('btn-warning');
+        $(this).removeClass('glyphicon-check').addClass('glyphicon-check');
       }else{
         $('.' + checkClass).prop('checked', false);
         $('.todo_title').removeClass('done');
-        $(this).text("全選択").removeClass('btn-warning').addClass('btn-primary');
+        $(this).removeClass('glyphicon-unchecked').addClass('glyphicon-unchecked');
       }
   });
 });

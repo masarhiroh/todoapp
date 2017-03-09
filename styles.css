@@ -1,10 +1,13 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: Arial, "メイリオ", sans-serif;
+  font-size: 16px;
 }
 
-#container {
-  width: 500px;
-  margin: 15px auto;
+i {
+  font-size: 20px;
+}
+i:hover {
+  opacity: 0.6;
 }
 
 h1 {
@@ -13,34 +16,35 @@ h1 {
   margin-bottom: 10px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.mb-4 {
+  margin-bottom: 1.5rem!important;
 }
 
-ul > li {
-  padding-bottom: 15px;
-}
-
-#new_todo {
+/* **************** */
+#new_todo_form > input[type="text"] {
   padding: 8px;
   border-radius: 3px;
-  width: 490px;
   margin: 0 auto 15px;
   font-size: 16px;
 }
 
-.delete_todo {
-  float: right;
-  display: inline-block;
-  cursor: pointer;
+/* **************** */
+th, td {
+  padding: 10px;
 }
 
+.checkAll {
+  cursor: pointer;
+}
+.delete_todo {
+  text-align: center;
+  cursor: pointer;
+}
 .done {
   text-decoration: line-through;
 }
-
 #todo_template {
   display: none;
 }
+
+/* **************** */
