@@ -14,7 +14,16 @@ class Todo {
     $this->_createToken();
 
     try {
+      //postgres接続_cloud9用
       $this->_db = new \PDO(DSN, DB_USERNAME, DB_PASSWORD);
+      
+      //postgres接続_heroku用
+/*
+      $url = parse_url(getenv('DATABASE_URL'));
+      $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+      $this->_db = new \PDO($dsn, $url['user'], $url['pass']);
+*/
+      
       $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     } catch (\PDOException $e) {
       echo $e->getMessage();

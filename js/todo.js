@@ -13,7 +13,7 @@ $(function() {
       mode: 'update',
       token: $('#token').val()
     }, function(res) {
-      if (res.state === '1') {
+      if (res.state == '1') {
         $('#todo_' + id).find('.todo_title').addClass('done');
       } else {
         $('#todo_' + id).find('.todo_title').removeClass('done');
@@ -68,6 +68,7 @@ $(function() {
 
 
   // チェックボックス全選択
+  // 全チェックの判定
   if($("input[type=checkbox]:checked").size() == 0){
     $('[data-checkAllClassName]').val('0').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
   } else{
@@ -88,11 +89,11 @@ $(function() {
       if(checkVal == 1){
         $('.' + checkClass).prop('checked', true);
         $('.todo_title').addClass('done');
-        $(this).removeClass('glyphicon-check').addClass('glyphicon-check');
+        $(this).removeClass('glyphicon-unchecked').addClass('glyphicon-check');
       }else{
         $('.' + checkClass).prop('checked', false);
         $('.todo_title').removeClass('done');
-        $(this).removeClass('glyphicon-unchecked').addClass('glyphicon-unchecked');
+        $(this).removeClass('glyphicon-check').addClass('glyphicon-unchecked');
       }
   });
 });

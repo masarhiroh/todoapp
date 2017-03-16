@@ -20,14 +20,16 @@ $todos = $todoApp->getAll();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Todo List</title>
-  <!-- BootstrapのCSS読み込み -->
-  <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- jQuery読み込み -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <!-- jQueryテーマ読み込み -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/cupertino/jquery-ui.css">
   <!-- BootstrapのJS読み込み -->
   <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-  
-  
+  <!-- BootstrapのCSS読み込み -->
+  <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- CSS読み込み -->
   <link href="styles.css" rel="stylesheet">
 </head>
 
@@ -66,9 +68,9 @@ $todos = $todoApp->getAll();
             <?php foreach ($todos as $todo) : ?>
               <tr id="todo_<?= h($todo->id); ?>" data-id="<?= h($todo->id); ?>">
                 <td>
-                  <input type="checkbox" class="update_todo checkGroupA" <?php if ($todo->state === '1') { echo 'checked'; } ?>>
+                  <input type="checkbox" class="update_todo checkGroupA" <?php if ($todo->state == '1') { echo 'checked'; } ?>>
                 </td>
-                <td class="todo_title <?php if ($todo->state === '1') { echo 'done'; } ?>">
+                <td class="todo_title <?php if ($todo->state == '1') { echo 'done'; } ?>">
                   <?= h($todo->title); ?>
                 </td>
                 <td class="todo_deadline">
@@ -98,8 +100,6 @@ $todos = $todoApp->getAll();
   </section>
   
   <input type="hidden" id="token" value="<?= h($_SESSION['token']); ?>">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="js/datepicker-ja.js"></script>
   <script src="js/todo.js"></script>
   <script>
